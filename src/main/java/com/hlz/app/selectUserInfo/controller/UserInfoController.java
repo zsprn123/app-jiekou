@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/UserInfo")
+@RequestMapping(value = "/dserInfo")
 public class UserInfoController {
     private Logger logger = LoggerFactory.getLogger(UserInfoController.class);
     private String logtitle = "用户信息接口|#";
@@ -21,7 +21,7 @@ public class UserInfoController {
     @Autowired
     private UserInfoServiceImpl userInfoService;
     @ResponseBody
-    @GetMapping("/UserInfoData")
+    @GetMapping("/dserInfoData")
     public TestReponseDto FindUserInfo(String user_uuid){
         TestReponseDto dto =new TestReponseDto();
         try{
