@@ -1,7 +1,8 @@
-package com.hlz.app.url.controller;
+package com.hlz.app.selectUserInfo.controller;
+
 import com.hlz.app.common.TestReponseDto;
-import com.hlz.app.url.model.UrlInfo;
-import com.hlz.app.url.service.UrlService;
+import com.hlz.app.selectUserInfo.model.UserInfoDto;
+import com.hlz.app.selectUserInfo.service.impl.UserInfoServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,20 +13,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/url")
-public class UrlController {
-    private Logger logger = LoggerFactory.getLogger(UrlController.class);
-    private String logtitle = "主页图片URL接口|#";
+@RequestMapping(value = "/UserInfo")
+public class UserInfoController {
+    private Logger logger = LoggerFactory.getLogger(UserInfoController.class);
+    private String logtitle = "用户信息接口|#";
 
     @Autowired
-    private UrlService urlService;
+    private UserInfoServiceImpl userInfoService;
     @ResponseBody
-    @GetMapping("/all")
-    public TestReponseDto findUrl(){
-
+    @GetMapping("/UserInfoData")
+    public TestReponseDto FindUserInfo(String user_uuid){
         TestReponseDto dto =new TestReponseDto();
         try{
-            List<UrlInfo> list = urlService.findUrl();
+            List<UserInfoDto> list = userInfoService.FindUserInfo(user_uuid);
             dto.setData(list);
             dto.setMessage("操作成功");
             dto.setSuccess("1");
@@ -34,6 +34,7 @@ public class UrlController {
             dto.setMessage("操作失败");
             dto.setSuccess("-1");
             logger.info(logtitle+"查询失败,"+"异常："+e);
+            e.printStackTrace();
         }
         return dto;
     }
